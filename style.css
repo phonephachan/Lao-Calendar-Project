@@ -413,8 +413,8 @@ body {
   
   /* Compact Nav */
   .nav-btn { font-size: 1em; padding: 5px; top: 10px; }
-  #prevBtn { left: 40px; }
-  #nextBtn { right: 40px; }
+  #prevBtn { left: 60px; }
+  #nextBtn { right: 60px; }
   
   .month-selector-wrapper { top: 8px; left: 5px; width: 24px; height: 24px; }
   .download-btn { top: 8px; right: 5px; font-size: 1em; }
