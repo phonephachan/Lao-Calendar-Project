@@ -1,0 +1,741 @@
+:root {
+  --primary-red: #8B0000; /* Deep, premium red */
+  --accent-gold: #C5A059; /* Muted antique gold */
+  --text-primary: #2D2D2D; /* Softer black */
+  --text-secondary: #555555;
+  --bg-page: #F2F2F0; /* Warm grey/paper tone */
+  --bg-card: #FFFFFF;
+  --border-subtle: #E0E0E0;
+  --sunday-red: #D32F2F; /* Brighter red for Sunday */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  font-family: "Noto Sans Lao", sans-serif;
+  background-color: var(--bg-page);
+  background-image: url('background.png');
+  background-repeat: repeat;
+  background-size: 500px; /* Adjust scale of pattern */
+  background-attachment: fixed; /* Parallax feel */
+  color: var(--text-primary);
+  margin: 0;
+  padding: 5px 5px; /* Significantly reduced */
+  line-height: 1.3; /* Tighter line height */
+}
+
+.calendar-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  background-color: var(--bg-card);
+  padding: 15px; /* Compact padding */
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  border-top: 5px solid var(--primary-red);
+  position: relative; /* For absolute button positioning */
+}
+
+/* --- Header Section --- */
+.main-header {
+  text-align: center;
+  margin-bottom: 5px; /* Compact */
+  border-bottom: 1px solid rgba(0,0,0,0.05); /* Very subtle divider */
+  padding-bottom: 5px;
+}
+
+.main-header h1 {
+  color: var(--text-primary); /* Dark grey, neutral branding */
+  font-size: 1.2em; /* Smaller than month title */
+  margin: 0 0 2px 0;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+}
+
+.main-header h2 {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: normal;
+  margin: 0;
+  font-style: italic;
+}
+
+/* --- Navigation --- */
+/* --- Navigation --- */
+.navigation-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+  position: static; /* Ensure buttons position relative to container or header */
+}
+
+/* Nav Buttons - Absolute Side Positioning */
+.nav-btn {
+  position: absolute;
+  top: 15px; /* Move to top */
+  /* transform: translateY(-50%); Removed vertical centering */
+  background-color: transparent;
+  color: var(--primary-red);
+  border: none; /* Remove border for icon style */
+  font-size: 1.5em; /* Larger icon */
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 10px;
+  z-index: 10;
+}
+
+#prevBtn {
+  left: 10px;
+}
+
+#nextBtn {
+  right: 60px; /* Adjusted to avoid overlap with download button (right: 10px) */
+}
+
+.nav-btn:hover {
+  background-color: rgba(139, 0, 0, 0.1); /* Subtle hover */
+  border-radius: 50%;
+  color: var(--primary-red);
+  transform: scale(1.1); /* Only scale, no translate */
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+.download-btn {
+    position: absolute;
+    top: 10px; /* Tighter position */
+    right: 10px;
+}
+
+#currentMonthDisplay {
+  font-size: 1.1em; /* Smaller */
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 100px;
+  text-align: center;
+}
+
+/* --- Month Block & Header --- */
+.month-block {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Month Block & Header --- */
+.month-block {
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.month-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline; /* Align text baselines */
+  justify-content: flex-start; /* Start from left */
+  padding: 10px 15px; /* Add side padding */
+  background-color: transparent;
+  border: none;
+  margin-top: 5px; 
+  line-height: 1.3;
+  text-align: left;
+}
+
+.month-header br {
+    display: none; /* Hide the line break to allow flow */
+}
+
+.header-month-title {
+    display: block; /* Or inline-block if we want flow, but flex item behaves like block-ified */
+    font-size: 1.8em;
+    font-weight: 800;
+    color: var(--primary-red);
+    margin-bottom: 0; /* Remove bottom margin to sit on line */
+    margin-right: 15px; /* Space between title and details */
+}
+
+.header-details {
+    font-size: 1.15em; /* Increased from 0.95em */
+    color: var(--text-secondary);
+    font-weight: normal;
+    /* Allow it to take remaining space or wrap naturally */
+}
+
+/* --- Days Grid --- */
+.days-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: var(--primary-red);
+  color: white;
+}
+
+.day-name {
+  padding: 8px 4px; /* Reduced padding */
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.85em;
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+
+.day-name:last-child {
+  border-right: none;
+}
+
+.day-name.sunday {
+  background-color: rgba(0,0,0,0.1);
+  color: white;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border: 1px solid var(--accent-gold);
+  border-top: none;
+  background-color: #fff;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+/* --- Day Cells --- */
+.day-cell {
+  border-right: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 4px; /* Reduced padding */
+  min-height: 85px; /* Much shorter height */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  transition: background-color 0.2s;
+}
+
+.day-cell:hover {
+  background-color: #FAFAFA;
+}
+
+.day-cell:nth-child(7n) {
+  border-right: none;
+}
+
+.day-cell.empty {
+  background-color: #F9F9F9;
+}
+
+/* --- Cell Content --- */
+.solar-date {
+  font-size: 1.8em; /* Smaller number */
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.day-cell.sunday .solar-date {
+  color: var(--sunday-red);
+}
+
+.day-cell.red .solar-date {
+  color: var(--primary-red);
+}
+
+.lunar-text {
+  font-size: 0.85em; /* Increased size */
+  text-align: center;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 4px; /* Increased gap */
+  line-height: 1.4; /* More breathing room */
+}
+
+.day-cell.red .lunar-text {
+  color: var(--primary-red);
+  opacity: 0.8;
+}
+
+.prediction-text {
+  font-size: 0.8em; /* Increased size */
+  color: var(--text-primary);
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.4; /* More breathing room */
+  padding: 0 2px;
+  margin-top: 2px; /* Add slight top margin if needed */
+}
+
+.day-cell.red .prediction-text {
+  color: var(--primary-red);
+}
+
+/* Buddha Icon */
+/* Buddha Icon */
+.icon.buddha {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px; /* Explicit size */
+  height: 18px;
+  z-index: 5;
+}
+
+.icon.buddha svg {
+  width: 100%;
+  height: 100%;
+  display: block; /* Remove inline spacing */
+}
+
+/* --- Footer --- */
+.month-footer {
+  margin-top: 15px; /* Reduced margin */
+  padding: 15px; /* Reduced padding */
+  background-color: #FFFDF5;
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 4px;
+  font-size: 0.8em;
+  color: var(--text-primary);
+}
+
+.month-footer ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.month-footer li {
+  margin-bottom: 4px;
+  padding-left: 12px;
+  position: relative;
+}
+
+/* Custom bullet */
+.month-footer li::before {
+  content: "•";
+  color: var(--primary-red);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Responsive */
+/* Responsive */
+@media (max-width: 768px) {
+  body { padding: 0; }
+  .calendar-container { 
+      padding: 5px 2px; 
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+  }
+  
+  .day-cell { 
+      min-height: 50px; /* Allow shrinking */
+      padding: 1px;
+      border-width: 0.5px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+  }
+
+  .solar-date { 
+      font-size: 1.1em; 
+      margin-bottom: 0;
+      line-height: 1;
+  }
+  
+  /* Toggle Views */
+  .desktop-only { display: none !important; }
+  .mobile-info { display: block !important; }
+
+  .mobile-info {
+      width: 100%;
+      text-align: center;
+      margin-top: 1px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .mobile-lunar {
+      font-size: 0.55em;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.1;
+      white-space: nowrap;
+  }
+  
+  .mobile-prediction {
+      font-size: 0.5em; 
+      color: #333; /* Slightly darker for readability */
+      font-weight: normal;
+      line-height: 1.1;
+      margin-top: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+  }
+  
+  .day-cell.red .mobile-lunar,
+  .day-cell.red .mobile-prediction {
+      color: var(--primary-red);
+  }
+
+  /* Force headers small */
+  .day-name {
+      font-size: 0.5em;
+      padding: 2px 0;
+      white-space: nowrap;
+      overflow: hidden; 
+      letter-spacing: -0.5px;
+  }
+
+  /* Compact Header */
+  .header-month-title { font-size: 1.1em; margin-right: 5px; }
+  .header-details { font-size: 0.65em; display: block; line-height: 1.2; }
+  
+  .main-header {
+      padding-top: 40px; /* Push text down below buttons */
+      padding-left: 10px;
+      padding-right: 10px;
+  }
+  
+  .month-header { flex-direction: column; align-items: center; text-align: center; } 
+  
+  /* Compact Nav */
+  .nav-btn { font-size: 1em; padding: 5px; top: 10px; }
+  #prevBtn { left: 40px; }
+  #nextBtn { right: 40px; }
+  
+  .month-selector-wrapper { top: 8px; left: 5px; width: 24px; height: 24px; }
+  .download-btn { top: 8px; right: 5px; font-size: 1em; }
+  
+  /* Adjust modal */
+  .modal-content { width: 95%; margin: 10px auto; }
+}
+
+/* Default state for mobile view elements */
+.mobile-info { display: none; }
+
+/* --- Icon Buttons --- */
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5em; /* Visible but not huge */
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s, transform 0.2s;
+  color: var(--text-secondary);
+  opacity: 0.6; /* Subtle by default */
+}
+
+/* Position it absolutely in the top right of the container for subtlety */
+.download-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.icon-btn:hover {
+  background-color: rgba(0,0,0,0.05);
+  transform: scale(1.1);
+  opacity: 1; /* Fully visible on hover */
+}
+
+/* --- Print Styles --- */
+@media print {
+  /* ... existing print styles ... */
+  .download-btn { display: none !important; }
+  
+  body {
+    background-color: white;
+    padding: 0;
+    margin: 0;
+  }
+/* ... keep rest of print styles but ensure we don't duplicate excessively or break things. 
+   Wait, I am replacing the block at the end. I need to be careful not to delete the existing Print Styles if I want to keep them, 
+   but the user said "Remove Print button". They didn't say disable printing capability (Cmd+P), 
+   but I will clean up the explicit "Action Buttons" block I added. 
+   I will re-include the necessary print styles below. 
+*/
+
+  .calendar-container {
+    box-shadow: none;
+    border: none;
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .month-header {
+      background-color: transparent;
+      border: 1px solid #ccc;
+  }
+
+  .navigation-controls, 
+  .main-header h2 { 
+    display: none !important; 
+  }
+
+  /* Maximize grid for visibility */
+  .calendar-grid {
+      border: 1px solid #000;
+  }
+  
+  .day-cell {
+      border-color: #000;
+      min-height: 100px;
+  }
+
+  .solar-date {
+      color: black;
+  }
+
+  .day-cell.sunday .solar-date,
+  .day-cell.red .solar-date {
+     color: black;
+     font-weight: 800;
+  }
+  
+  .day-cell:hover {
+      background-color: transparent;
+  }
+
+  @page {
+      size: landscape;
+      margin: 0.5cm;
+  }
+}
+
+/* --- Capture Mode (High Contrast for Image) --- */
+/* Target specific elements with high specificity to override any defaults */
+.capturing .calendar-grid .day-cell .solar-date,
+.capturing .calendar-grid .day-cell .lunar-text,
+.capturing .calendar-grid .day-cell .prediction-text,
+.capturing .month-header,
+.capturing .month-footer,
+.capturing .month-footer li {
+    color: #000000 !important; /* Absolute Black */
+    opacity: 1 !important; /* No transparency */
+    text-shadow: none !important; /* No shadows */
+    font-weight: 700 !important; /* Force Bold */
+    visibility: visible !important;
+    -webkit-font-smoothing: antialiased; /* Crisp text */
+}
+
+/* Specific overrides for Red/Special days */
+.capturing .calendar-grid .day-cell.red .solar-date,
+.capturing .calendar-grid .day-cell.red .prediction-text,
+.capturing .calendar-grid .day-cell.sunday .solar-date {
+    color: #b30000 !important; /* Deep Red for contrast */
+    font-weight: 800 !important; /* Extra Bold */
+    opacity: 1 !important;
+}
+
+/* Header Row (Sun-Sat) must be WHITE on the dark red background */
+.capturing .days-header .day-name,
+.capturing .days-header .day-name.sunday {
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+    border-color: rgba(255,255,255,0.3) !important;
+}
+
+/* Ensure containers don't have opacity issues */
+.capturing .month-block,
+.capturing .calendar-grid,
+.capturing .day-cell {
+    background-color: transparent !important; /* Let container white shine through or set white explicitly if needed */
+    opacity: 1 !important;
+    border-color: #000 !important; /* Crisp borders */
+}
+
+/* Month Header Box */
+.capturing .month-header {
+    background-color: #FFFDF5 !important;
+    border: 2px solid #C5A059 !important;
+    color: #000 !important;
+}
+
+/* Hide non-essential interactive elements just in case */
+.capturing .nav-btn,
+.capturing .download-btn {
+    display: none !important;
+}
+
+/* --- Modal Styles --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    backdrop-filter: blur(3px); /* Glassmorphism effect */
+    animation: fadeIn 0.3s;
+}
+
+.modal.visible {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    animation: slideIn 0.3s;
+    font-family: "Noto Sans Lao", sans-serif;
+    overflow: hidden;
+}
+
+@keyframes slideIn {
+    from {transform: translateY(-50px); opacity: 0;}
+    to {transform: translateY(0); opacity: 1;}
+}
+
+.modal-header {
+    background-color: var(--primary-red);
+    color: white;
+    padding: 15px;
+    padding-right: 50px; /* Space for close button */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.close-modal {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: #ddd;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modal-item:last-child {
+    border-bottom: none;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.value {
+    display: block;
+    font-size: 1.1em;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+#modalPrediction {
+    color: var(--primary-red);
+    font-weight: 600;
+}
+
+/* Hide modal in print/capture mode */
+@media print {
+    .modal { display: none !important; }
+}
+
+.capturing .modal {
+    display: none !important;
+}
+
+/* --- Month Selector (Icon Style) --- */
+.month-selector-wrapper {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 32px;
+    height: 32px;
+    z-index: 20;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.month-selector-wrapper:hover {
+    transform: scale(1.1);
+}
+
+.selector-icon {
+    width: 100%;
+    height: 100%;
+    color: var(--primary-red);
+    opacity: 0.6;
+}
+
+.month-selector-wrapper:hover .selector-icon {
+    opacity: 1;
+}
+
+.month-selector {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Invisible but clickable */
+    cursor: pointer;
+    font-size: 16px; /* Avoid zoom on mobile */
+}
+
+/* Hide selector in capture mode */
+.capturing .month-selector-wrapper {
+    display: none !important;
+}
+
+/* Adjust Prev Button to Symmetrical Position */
+#prevBtn {
+    left: 60px; /* Symmetrical with Next Button (right: 60px) */
+}

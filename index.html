@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="lo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lao Calendar 2026</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  </head>
+  <body>
+    <div class="calendar-container" id="calendar-container-capture">
+      <div class="month-selector-wrapper" title="ເລືອກເດືອນ">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="selector-icon"
+        >
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+        <select id="monthSelector" class="month-selector"></select>
+      </div>
+      <header class="main-header">
+        <h1>ປະຕິທິນລາວ 2026</h1>
+        <!-- Informational text from Image 1 can go here or be omitted for brevity -->
+        <button
+          id="downloadBtn"
+          class="icon-btn download-btn"
+          title="Download Image"
+        >
+          📥
+        </button>
+        <div class="navigation-controls">
+          <button id="prevBtn" class="nav-btn">&#10094;</button>
+          <span id="currentMonthDisplay"></span>
+          <button id="nextBtn" class="nav-btn">&#10095;</button>
+        </div>
+      </header>
+      <div id="calendar-grid">
+        <!-- Months will be rendered here -->
+      </div>
+    </div>
+    <!-- Day Detail Modal -->
+    <div id="dayDetailModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="modal-header">
+          <h2 id="modalDate"></h2>
+          <span id="modalDayName"></span>
+        </div>
+        <div class="modal-body">
+          <div class="modal-item">
+            <span class="label">ວັນທາງຈັນທະຄະຕິ:</span>
+            <span id="modalLunar" class="value"></span>
+          </div>
+          <div class="modal-item">
+            <span class="label">ຄຳທຳນາຍ:</span>
+            <span id="modalPrediction" class="value"></span>
+          </div>
+          <div class="modal-item special-row">
+            <span class="label">ວັນສຳຄັນ:</span>
+            <span id="modalSpecial" class="value"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
